@@ -45,7 +45,7 @@ app.delete('/api/persons/:id', (request, response) => {
     .catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const body = request.body
 
     const newPerson = new Person({
@@ -53,9 +53,11 @@ app.post('/api/persons', (request, response) => {
         number: body.number
     })
 
-    newPerson.save().then(savedPerson => {
+    newPerson.save()
+    .then(savedPerson => {
         response.json(savedPerson)
     })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response) => {

@@ -4,7 +4,7 @@ const Notification = ({ message }) => {
     }
 
     return (
-        <div className={message.includes('has already been removed') ? 'error' : 'success'}>
+        <div className={(message.includes('Added') || message.includes('Updated')) ? 'success' : 'error'}>
         {message}
         </div>
     )

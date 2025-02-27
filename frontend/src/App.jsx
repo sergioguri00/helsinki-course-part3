@@ -62,16 +62,25 @@ const App = () => {
       return
     }
     personService.create({name: newName, number: newNumber})
-    .then(response => setPersons(persons.concat(response)))
-    setTimeout(() => {
-      setErrorMessage(null)
-    }
-    , 2000)
-    setErrorMessage(
-      `Added ${newName}`
-    )
-    setNewName('')
-    setNewNumber('')
+    .then(response => {
+      setPersons(persons.concat(response))
+      setTimeout(() => {
+        setErrorMessage(null)
+      }
+      , 2000)
+      setErrorMessage(
+        `Added ${newName}`
+      )
+      setNewName('')
+      setNewNumber('')
+    })
+    .catch(error => {
+      setTimeout(() => {
+        setErrorMessage(null)
+      }
+      , 2000)
+      setErrorMessage(error.response.data.error)
+    })
   }
 
   const handleChangeFilter = (event) => {
